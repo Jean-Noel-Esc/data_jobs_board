@@ -4,7 +4,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, resources={
     r"/*": {
-        "origins": ["https://data-jobs-board.onrender.com"],
+        "origins": ["https://jobboard-frontend-l6cz.onrender.com"],  # Mettez à jour avec votre URL frontend
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type"]
     }

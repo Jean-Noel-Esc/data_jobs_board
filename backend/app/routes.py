@@ -16,6 +16,7 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 print(f"API Key loaded: {'Yes' if OPENAI_API_KEY and OPENAI_API_KEY.startswith('sk-') else 'No'}")
 
 @app.route('/api/jobs', methods=['GET'])
+@cross_origin() 
 def get_jobs():
     try:
         df = pd.read_csv('app/data/jobs.csv')
