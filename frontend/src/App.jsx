@@ -71,6 +71,7 @@ const App = () => {
             <Route path="/earn" element={<Earn />} /> 
             <Route path="/prepare" element={<Prepare />} /> 
             <Route path="/about" element={<About />} />
+            <Route path="*" element={<Welcome />} />
           </Routes>
         </Box>
       </Router>
