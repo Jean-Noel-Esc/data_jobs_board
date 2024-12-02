@@ -67,7 +67,7 @@ const Earn = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://localhost:5000/api/analyze-salary', {
+      const response = await fetch('https://jobboard-api-ur9k.onrender.com/api/analyze-salary', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
