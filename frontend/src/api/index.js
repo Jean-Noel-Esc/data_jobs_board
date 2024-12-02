@@ -1,5 +1,6 @@
-const API_URL = import.meta.env.VITE_API_URL || 'https://data-jobs-board.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'https://jobboard-api-ur9k.onrender.com';
 
+// Rest of your code stays the same
 export const fetchJobs = async () => {
     try {
         const response = await fetch(`${API_URL}/api/jobs`);
