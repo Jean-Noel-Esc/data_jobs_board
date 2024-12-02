@@ -59,8 +59,8 @@ const Welcome = () => {
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
+    <Router>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <Box sx={{ width: '100%', minHeight: '100vh' }}>
           <Navbar />
@@ -74,8 +74,8 @@ const App = () => {
             <Route path="*" element={<Welcome />} />
           </Routes>
         </Box>
-      </Router>
-    </ThemeProvider>
+      </ThemeProvider>
+    </Router>
   );
 };
 
