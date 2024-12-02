@@ -71,7 +71,13 @@ const Earn = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type'
         },
+        mode: 'cors',
+        credentials: 'same-origin',
         body: JSON.stringify({ experiences }),
       });
 
@@ -87,7 +93,7 @@ const Earn = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+};
 
   return (
     <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>

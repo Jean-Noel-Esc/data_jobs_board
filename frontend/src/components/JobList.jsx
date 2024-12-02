@@ -20,7 +20,15 @@ const JobList = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('https://jobboard-api-ur9k.onrender.com/api/jobs');
+        const response = await axios.get('https://jobboard-api-ur9k.onrender.com/api/jobs', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+          }
+        });
         setJobs(response.data);
         setFilteredJobs(response.data);
       } catch (error) {

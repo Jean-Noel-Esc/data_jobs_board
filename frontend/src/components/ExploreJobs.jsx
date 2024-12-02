@@ -26,19 +26,26 @@ const ExploreJobs = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type'
         },
+        mode: 'cors',  // Ajout important
+        credentials: 'same-origin',
         body: JSON.stringify({ description: jobDescription }),
       });
 
-      const data = await response.json();
-      
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to get suggestions');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to get suggestions');
       }
 
+      const data = await response.json();
       setSuggestions(data.suggestions);
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'An error occurred');
+      console.error('Error details:', err);
     } finally {
       setLoading(false);
     }
