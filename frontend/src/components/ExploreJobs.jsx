@@ -88,25 +88,76 @@ const ExploreJobs = () => {
         </Typography>
       )}
 
-      {suggestions.length > 0 && (
-        <Box>
-          <Typography variant="h6" gutterBottom sx={{ mb: 3 }}>
-            Suggested Job Titles:
-          </Typography>
-          {suggestions.map((suggestion, index) => (
-            <Card key={index} sx={{ mb: 2 }}>
-              <CardContent>
-                <Typography variant="h6">{suggestion.title}</Typography>
-                {suggestion.description && (
-                  <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                    {suggestion.description}
+    {suggestions.length > 0 && (
+      <Box>
+        <Typography variant="h6" gutterBottom sx={{ mb: 3 }}>
+          Suggested Job Titles:
+        </Typography>
+        {suggestions.map((suggestion, index) => (
+          <Card key={index} sx={{ mb: 3, p: 2 }}>
+            <CardContent>
+              {/* Titre du poste */}
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                <Typography 
+                  component="span" 
+                  sx={{ color: 'primary.main', fontWeight: 'bold', mr: 1 }}
+                >
+                  Title:
+                </Typography>
+                <Typography variant="h6" component="span">
+                  {suggestion.title}
+                </Typography>
+              </Box>
+
+              {/* Description avec sections numérotées */}
+              <Box>
+                <Typography 
+                  component="span" 
+                  sx={{ color: 'primary.main', fontWeight: 'bold', display: 'block', mb: 1 }}
+                >
+                  Description:
+                </Typography>
+                <Box sx={{ pl: 2 }}>
+                  {suggestion.description.split(/\d\./).map((section, idx) => {
+                    if (idx === 0) return null; // Skip empty first split
+                    return (
+                      <Box key={idx} sx={{ mb: 2 }}>
+                        <Typography 
+                          variant="body1" 
+                          sx={{ 
+                            display: 'flex',
+                            '&:before': {
+                              content: `"${idx}."`,
+                              minWidth: '25px',
+                              fontWeight: 'bold'
+                            }
+                          }}
+                        >
+                          {section.trim()}
+                        </Typography>
+                      </Box>
+                    );
+                  })}
+                </Box>
+              </Box>
+
+              {/* Match Commentary */}
+              {suggestion.match && (
+                <Box sx={{ mt: 2, bgcolor: 'primary.light', p: 2, borderRadius: 1 }}>
+                  <Typography 
+                    variant="body1" 
+                    sx={{ color: 'white', fontStyle: 'italic' }}
+                  >
+                    Match Analysis: {suggestion.match}
                   </Typography>
-                )}
-              </CardContent>
-            </Card>
-          ))}
-        </Box>
-      )}
+                </Box>
+              )}
+            </CardContent>
+          </Card>
+        ))}
+      </Box>
+    )}
+
     </Container>
   );
 };
