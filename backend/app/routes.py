@@ -77,6 +77,7 @@ def explore_jobs():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/analyze-salary', methods=['POST'])
+@cross_origin()
 def analyze_salary():
     try:
         data = request.get_json()
