@@ -87,70 +87,81 @@ const ExploreJobs = () => {
           {error}
         </Typography>
       )}
-
-    {suggestions.length > 0 && (
-      <Box>
-        <Typography variant="h6" gutterBottom sx={{ mb: 3 }}>
-          Suggested Roles:
-        </Typography>
-        {suggestions.map((suggestion, index) => (
-  <Card key={index} sx={{ mb: 3, p: 2 }}>
+      {suggestions.map((suggestion, index) => (
+  <Card key={index} sx={{ mb: 3, p: 3, backgroundColor: '#f8f9fa' }}>
     <CardContent>
-      {/* Titre du poste */}
-      <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+      {/* En-tête avec le titre */}
+      <Box sx={{ 
+        display: 'flex', 
+        alignItems: 'baseline',
+        mb: 3,
+        borderBottom: '1px solid #e0e0e0',
+        pb: 2
+      }}>
         <Typography 
           component="span" 
-          sx={{ color: 'primary.main', fontWeight: 'bold', mr: 1 }}
+          sx={{ 
+            color: 'primary.main', 
+            fontWeight: 'bold', 
+            fontSize: '1.1rem',
+            mr: 2
+          }}
         >
           Title:
         </Typography>
         <Typography 
           variant="h6" 
           component="span"
-          sx={{ ml: 1 }}  // Ajout d'une marge à gauche
+          sx={{ 
+            fontWeight: '500',
+            color: '#2c3e50'
+          }}
         >
-          {suggestion.title || "Marketing Analyst"}  // Le titre suggéré sera affiché ici
+          {suggestion.title}
         </Typography>
       </Box>
 
-      {/* Description avec sections numérotées */}
+      {/* Section Description */}
       <Box>
         <Typography 
           component="span" 
-          sx={{ color: 'primary.main', fontWeight: 'bold', display: 'block', mb: 1 }}
+          sx={{ 
+            color: 'primary.main', 
+            fontWeight: 'bold',
+            fontSize: '1.1rem',
+            display: 'block',
+            mb: 2
+          }}
         >
           Description:
         </Typography>
-        <Box sx={{ pl: 2 }}>
-          {suggestion.description.split(/\d\./).map((section, idx) => {
-            if (idx === 0) return null;
-            return (
-              <Box key={idx} sx={{ mb: 2 }}>
-                <Typography 
-                  variant="body1" 
-                  sx={{ 
-                    display: 'flex',
-                    '&:before': {
-                      content: `"${idx}."`,
-                      minWidth: '25px',
-                      fontWeight: 'bold'
-                    }
-                  }}
-                >
-                  {section.trim()}
-                </Typography>
-              </Box>
-            );
-          })}
-        </Box>
+        <Typography 
+          variant="body1" 
+          sx={{ 
+            pl: 2,
+            lineHeight: 1.6,
+            color: '#34495e'
+          }}
+        >
+          {suggestion.description}
+        </Typography>
       </Box>
 
-      {/* Match Commentary */}
+      {/* Match Commentary si présent */}
       {suggestion.match && (
-        <Box sx={{ mt: 2, bgcolor: 'primary.light', p: 2, borderRadius: 1 }}>
+        <Box sx={{ 
+          mt: 3,
+          bgcolor: 'primary.light',
+          p: 2,
+          borderRadius: 1,
+          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+        }}>
           <Typography 
             variant="body1" 
-            sx={{ color: 'white', fontStyle: 'italic' }}
+            sx={{ 
+              color: 'white',
+              fontStyle: 'italic'
+            }}
           >
             Match Analysis: {suggestion.match}
           </Typography>
@@ -159,8 +170,7 @@ const ExploreJobs = () => {
     </CardContent>
   </Card>
 ))}
-      </Box>
-    )}
+
 
     </Container>
   );
