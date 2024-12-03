@@ -93,7 +93,7 @@ const ExploreJobs = () => {
       {/* En-tête avec le titre */}
       <Box sx={{ 
         display: 'flex', 
-        alignItems: 'baseline',
+        alignItems: 'center',
         mb: 3,
         borderBottom: '1px solid #e0e0e0',
         pb: 2
@@ -104,16 +104,16 @@ const ExploreJobs = () => {
             color: 'primary.main', 
             fontWeight: 'bold', 
             fontSize: '1.1rem',
-            mr: 2
+            mr: 1
           }}
         >
-          Title:
+          Title :
         </Typography>
         <Typography 
           variant="h6" 
           component="span"
           sx={{ 
-            fontWeight: '500',
+            ml: 1,
             color: '#2c3e50'
           }}
         >
@@ -135,43 +135,41 @@ const ExploreJobs = () => {
         >
           Description:
         </Typography>
-        <Typography 
-          variant="body1" 
-          sx={{ 
-            pl: 2,
-            lineHeight: 1.6,
-            color: '#34495e'
-          }}
-        >
-          {suggestion.description}
-        </Typography>
-      </Box>
-
-      {/* Match Commentary si présent */}
-      {suggestion.match && (
-        <Box sx={{ 
-          mt: 3,
-          bgcolor: 'primary.light',
-          p: 2,
-          borderRadius: 1,
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-        }}>
-          <Typography 
-            variant="body1" 
-            sx={{ 
-              color: 'white',
-              fontStyle: 'italic'
-            }}
-          >
-            Match Analysis: {suggestion.match}
-          </Typography>
+        <Box sx={{ pl: 2 }}>
+          {suggestion.description.split(/\d\./).map((section, idx) => {
+            if (idx === 0) return null;
+            return (
+              <Box key={idx} sx={{ 
+                mb: 2,
+                display: 'flex',
+              }}>
+                <Typography 
+                  variant="body1" 
+                  sx={{ 
+                    minWidth: '20px',
+                    fontWeight: 'bold',
+                    mr: 1
+                  }}
+                >
+                  {idx}.
+                </Typography>
+                <Typography 
+                  variant="body1" 
+                  sx={{ 
+                    color: '#34495e',
+                    lineHeight: 1.6
+                  }}
+                >
+                  {section.trim()}
+                </Typography>
+              </Box>
+            );
+          })}
         </Box>
-      )}
+      </Box>
     </CardContent>
   </Card>
 ))}
-
-
     </Container>
   );
 };
