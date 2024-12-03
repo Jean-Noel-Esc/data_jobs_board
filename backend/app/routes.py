@@ -70,12 +70,19 @@ def explore_jobs():
         raw_suggestions = response.choices[0].message.content.strip().split('\n\n')
         suggestions = []
         
+        # Dans la fonction explore_jobs
         for suggestion in raw_suggestions:
-            if ':' in suggestion:
-                title, desc = suggestion.split(':', 1)
+            if 'Title:' in suggestion:
+                parts = suggestion.split('Description:', 1)
+                title = parts[0].replace('Title:', '').strip()
+                description = parts[1].strip() if len(parts) > 1 else ''
+                
+                # Formatage de la description pour assurer la numérotation
+                formatted_description = description.replace('**', '').strip()
+                
                 suggestions.append({
-                    'title': title.strip(),
-                    'description': desc.strip()
+                    'title': title,
+                    'description': formatted_description
                 })
 
         return jsonify({'suggestions': suggestions[:5]})
