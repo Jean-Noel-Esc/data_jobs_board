@@ -33,30 +33,38 @@ def get_jobs():
 def explore_jobs():
     try:
         data = request.get_json()
-        print("Received data:", data)
-        
         description = data.get('description')
-        if not description:
-            return jsonify({'error': 'Description is required'}), 400
-
+        
         prompt = f"""Based on the following job description, suggest 5 relevant job titles 
         that match the skills and responsibilities described. For each job title, 
-        provide a brief explanation of why it's a good match.
+        provide a brief explanation of why it's a good match. For each job title, 
+        provide a detailed explanation (at least 150 words) covering:
+        
+        1. Key responsibilities
+        2. Required skills and qualifications
+        3. Career growth opportunities
+        4. Industry relevance
+        5. Salary range and market demand
 
         Job Description: {description}
 
-        Please format each suggestion as:
-        Job Title: [title]
-        Explanation: [explanation]"""
+        Please format each suggestion exactly as:
+        Title: [Specific job title]
+        Description: [Detailed explanation covering all points above]
+
+        Make sure each description is comprehensive and actionable."""
 
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are a career counselor helping people find relevant job titles based on their skills and experience."},
+                {
+                    "role": "system", 
+                    "content": "You are a senior career counselor with expertise in job market analysis and career development. Provide detailed, actionable job suggestions with comprehensive explanations."
+                },
                 {"role": "user", "content": prompt}
             ],
             temperature=0.7,
-            max_tokens=1000
+            max_tokens=1500  # Increased for longer descriptions
         )
 
         raw_suggestions = response.choices[0].message.content.strip().split('\n\n')
